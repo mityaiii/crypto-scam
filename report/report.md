@@ -6,7 +6,7 @@
 - Мамченко Дмитрий
 
 Ссылку на ваш верифицированный контракт в обозревателе сети:
-- [link](https://lab.stellar.org/smart-contracts/contract-explorer?$=network$id=testnet&label=Testnet&horizonUrl=https:////horizon-testnet.stellar.org&rpcUrl=https:////soroban-testnet.stellar.org&passphrase=Test%20SDF%20Network%20/;%20September%202015;&smartContracts$explorer$contractId=CAV5OIJZSBPSL7DIH7NP7XKEE2266GBP4ZGD5YWIVP7FPEHVUKEOJS3I;;)
+- [link](https://lab.stellar.org/smart-contracts/contract-explorer?$=network$id=testnet&label=Testnet&horizonUrl=https:////horizon-testnet.stellar.org&rpcUrl=https:////soroban-testnet.stellar.org&passphrase=Test%20SDF%20Network%20/;%20September%202015;&smartContracts$explorer$contractId=CDNY6KYH64K4FSPUKIOXKGIEGKE7VRY6VEADEH4MNDYEQLTRM2AZVR5H;;)
 
 В сети Stellar не используется ChainId в формате EVM.
 Аналогом идентификации сети являются Network Passphrase и Network ID.
