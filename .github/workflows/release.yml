@@ -16,7 +16,7 @@ jobs:
     with:
       release_name: ${{ github.ref_name }}
       release_description: 'Soroban token release'
-      relative_path: '["my-cool-token/contracts/my-cool-token"]'
+      relative_path: 'my-cool-token/contracts/my-cool-token'
       package: 'my-cool-token'
 
     secrets:
