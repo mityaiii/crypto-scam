@@ -1,4 +1,4 @@
-use soroban_sdk::{Address, Env, U256};
+use soroban_sdk::{Address, Env};
 use soroban_token_sdk::events as token_events;
 
 pub fn publish_mint(e: &Env, to: Address, amount: i128) {
@@ -13,7 +13,7 @@ pub fn publish_transfer(
     e: &Env,
     from: Address,
     to: Address,
-    to_muxed_id: Option<U256>,
+    to_muxed_id: Option<u64>,
     amount: i128,
 ) {
     token_events::Transfer {
