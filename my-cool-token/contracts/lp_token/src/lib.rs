@@ -9,8 +9,9 @@ mod storage;
 mod test;
 
 use soroban_sdk::{
-    contract, contractimpl, panic_with_error, token::TokenInterface, Address, Env, MuxedAddress,
-    String,
+    contract, contractimpl, panic_with_error,
+    token::TokenInterface,
+    Address, Env, MuxedAddress, String,
 };
 
 use crate::{
@@ -24,7 +25,7 @@ use crate::{
 };
 
 #[contract]
-pub struct MyCoolToken;
+pub struct LpToken;
 
 fn check_nonnegative_amount(e: &Env, amount: i128) {
     if amount < 0 {
@@ -33,7 +34,7 @@ fn check_nonnegative_amount(e: &Env, amount: i128) {
 }
 
 #[contractimpl]
-impl MyCoolToken {
+impl LpToken {
     pub fn init(e: Env, admin: Address, decimal: u32, name: String, symbol: String) {
         if has_admin(&e) {
             panic_with_error!(&e, Error::AlreadyInitialized);
@@ -46,6 +47,12 @@ impl MyCoolToken {
         write_admin(&e, &admin);
         write_supply(&e, 0);
         write_metadata(&e, decimal, name, symbol);
+    }
+
+    pub fn set_admin(e: Env, new_admin: Address) {
+        let admin = read_admin(&e);
+        admin.require_auth();
+        write_admin(&e, &new_admin);
     }
 
     pub fn mint(e: Env, to: Address, amount: i128) {
@@ -70,12 +77,18 @@ impl MyCoolToken {
 }
 
 #[contractimpl]
-impl TokenInterface for MyCoolToken {
+impl TokenInterface for LpToken {
     fn allowance(e: Env, from: Address, spender: Address) -> i128 {
         read_allowance(&e, &from, &spender)
     }
 
-    fn approve(e: Env, from: Address, spender: Address, amount: i128, expiration_ledger: u32) {
+    fn approve(
+        e: Env,
+        from: Address,
+        spender: Address,
+        amount: i128,
+        expiration_ledger: u32,
+    ) {
         from.require_auth();
         check_nonnegative_amount(&e, amount);
 
