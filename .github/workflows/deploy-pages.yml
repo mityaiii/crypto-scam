@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  connect: read
+  contents: read
   pages: write
   id-token: write
 
@@ -48,11 +48,12 @@ jobs:
           path: my-cool-token/frontend/dist
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
 
     steps:
       - name: Deploy to GitHub Pages
