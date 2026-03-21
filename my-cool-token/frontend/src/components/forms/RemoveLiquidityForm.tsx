@@ -1,5 +1,5 @@
-import { type FormEvent, useMemo, useState } from "react";
-import { removeLiquidity } from "../lib/soroban";
+import { type SubmitEvent, useMemo, useState } from "react";
+import { removeLiquidity } from "../../lib/soroban";
 
 type RemoveLiquidityFormProps = {
   address: string;
@@ -27,7 +27,7 @@ export default function RemoveLiquidityForm({
     );
   }, [lpAmount, minTradeOut, minXlmOut, isSubmitting]);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
     try {
@@ -94,7 +94,7 @@ export default function RemoveLiquidityForm({
           </div>
         </div>
 
-        <div style={{ marginTop: 12 }}>
+        <div className="row" style={{ alignItems: "end" }}>
           <button className="primary" type="submit" disabled={!canSubmit}>
             {isSubmitting ? "Удаление..." : "Remove Liquidity"}
           </button>

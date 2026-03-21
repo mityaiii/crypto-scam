@@ -1,5 +1,5 @@
-import { type FormEvent, useMemo, useState } from "react";
-import { quoteTokenForXlm, swapTokenForXlm } from "../lib/soroban";
+import { type SubmitEvent, useMemo, useState } from "react";
+import { quoteTokenForXlm, swapTokenForXlm } from "../../lib/soroban";
 
 type SwapFormProps = {
   address: string;
@@ -31,7 +31,7 @@ export default function SwapForm({ address, onSuccess }: SwapFormProps) {
     );
   }, [tradeIn, minXlmOut, isQuoting, isSwapping]);
 
-  async function handleQuote(e: FormEvent) {
+  async function handleQuote(e: SubmitEvent) {
     e.preventDefault();
 
     try {
@@ -50,7 +50,7 @@ export default function SwapForm({ address, onSuccess }: SwapFormProps) {
     }
   }
 
-  async function handleSwap(e: FormEvent) {
+  async function handleSwap(e: SubmitEvent) {
     e.preventDefault();
 
     try {
@@ -85,27 +85,29 @@ export default function SwapForm({ address, onSuccess }: SwapFormProps) {
         Обмен MyCoolToken на XLM через контракт пула
       </p>
 
-      <form className="row" onSubmit={handleQuote}>
-        <div style={{ flex: 1, minWidth: 220 }}>
-          <label htmlFor="tradeIn">trade_in</label>
-          <input
-            id="tradeIn"
-            value={tradeIn}
-            onChange={(e) => setTradeIn(e.target.value)}
-            placeholder="1000000"
-            style={{ width: "100%", padding: 10, borderRadius: 12, border: "1px solid #d1d5db" }}
-          />
-        </div>
+      <form onSubmit={handleQuote}>
+        <div className="grid">
+          <div>
+            <label htmlFor="tradeIn">trade_in</label>
+            <input
+              id="tradeIn"
+              value={tradeIn}
+              onChange={(e) => setTradeIn(e.target.value)}
+              placeholder="1000000"
+              style={{ width: "100%", padding: 10, borderRadius: 12, border: "1px solid #d1d5db" }}
+            />
+          </div>
 
-        <div style={{ flex: 1, minWidth: 220 }}>
-          <label htmlFor="minXlmOut">min_xlm_out</label>
-          <input
-            id="minXlmOut"
-            value={minXlmOut}
-            onChange={(e) => setMinXlmOut(e.target.value)}
-            placeholder="1"
-            style={{ width: "100%", padding: 10, borderRadius: 12, border: "1px solid #d1d5db" }}
-          />
+          <div>
+            <label htmlFor="minXlmOut">min_xlm_out</label>
+            <input
+              id="minXlmOut"
+              value={minXlmOut}
+              onChange={(e) => setMinXlmOut(e.target.value)}
+              placeholder="1"
+              style={{ width: "100%", padding: 10, borderRadius: 12, border: "1px solid #d1d5db" }}
+            />
+          </div>
         </div>
 
         <div className="row" style={{ alignItems: "end" }}>
@@ -117,7 +119,7 @@ export default function SwapForm({ address, onSuccess }: SwapFormProps) {
             className="primary"
             type="button"
             disabled={!canSwap}
-            onClick={(e) => void handleSwap(e as unknown as FormEvent)}
+            onClick={(e) => void handleSwap(e as unknown as SubmitEvent)}
           >
             {isSwapping ? "Swap..." : "Swap"}
           </button>

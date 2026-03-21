@@ -31,6 +31,11 @@ export async function getConnectedAddress(): Promise<string | null> {
   }
 }
 
+export async function disconnectWallet() : Promise<void> {
+  ensureWalletKit();
+  await StellarWalletsKit.disconnect();
+}
+
 export async function signTransactionXdr(
   xdr: string,
   address: string,
